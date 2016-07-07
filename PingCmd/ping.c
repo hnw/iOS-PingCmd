@@ -85,6 +85,7 @@ __unused static const char copyright[] =
 
 #include <sys/param.h>		/* NB: we rely on this for <sys/types.h> */
 #include <sys/socket.h>
+#include "sys/socket_var.h"
 #include <sys/sysctl.h>
 #include <sys/time.h>
 #include <sys/uio.h>
@@ -92,8 +93,8 @@ __unused static const char copyright[] =
 #include <netinet/in.h>
 #include <netinet/in_systm.h>
 #include <netinet/ip.h>
-#include <netinet/ip_icmp.h>
-#include <netinet/ip_var.h>
+#include "netinet/ip_icmp.h"
+#include "netinet/ip_var.h"
 #include <arpa/inet.h>
 #include <net/if.h>
 
@@ -247,6 +248,24 @@ static void tvsub(struct timeval *, const struct timeval *);
 static uint32_t str2svc(const char *);
 static void usage(void) __dead2;
 
+#include <pthread.h>
+#define SHUTDOWN() write(ctrl_fd, "\n", sizeof("\n"))
+#define exit(retval) {SHUTDOWN(); pthread_exit((void *)retval);}
+
+int ctrl_fd = -1;
+int main(int argc, char *const *argv);
+
+void *ping_main_routine(void *_arg)
+{
+    void **arg = (void **)_arg;
+    int argc = (int)arg[1];
+    char **argv = (char**)arg[2];
+    ctrl_fd = (int)arg[0];
+    void *retval = (void *)(long)main(argc, argv);
+    SHUTDOWN();
+    return retval;
+}
+
 int
 main(int argc, char *const *argv)
 {
@@ -299,6 +318,20 @@ main(int argc, char *const *argv)
 	alarmtimeout = df = preload = tos = 0;
 
 	outpack = outpackhdr + sizeof(struct ip);
+	optind = 1; // initialize for getopt
+	/* initialize global vars */
+	options = 0;
+	nmissedmax = npackets = nreceived = nrepeats = 0;
+	ntransmitted = snpackets = snreceived = sntransmitted = 0;
+	sweepmax = sweepmin = 0;
+	sweepincr = 1;
+	interval = 1000;
+	waittime = MAXWAIT;
+	nrcvtimeout = 0;
+	icmp_len = 0;
+	timing = 0;
+	tmin = 999999999.0;
+	tmax = tsum = tsumsq = 0.0;
 	while ((ch = getopt(argc, argv,
 		"Aab:Cc:DdfG:g:h:I:i:k:Ll:M:m:nop:QqRrS:s:T:t:vW:z:"
 #ifdef IPSEC
@@ -707,9 +740,11 @@ main(int argc, char *const *argv)
 	}
 #endif /* IP_FORCE_OUT_IFP */
 	if (nocell) {
+        /*
 		if (setsockopt(s, IPPROTO_IP, IP_NO_IFT_CELLULAR,
 		    (char *)&nocell, sizeof (nocell)) != 0)
 			err(EX_OSERR, "setsockopt(IP_NO_IFT_CELLULAR)");
+         */
 	}
 	if (options & F_SO_DEBUG)
 		(void)setsockopt(s, SOL_SOCKET, SO_DEBUG, (char *)&hold,
@@ -1573,10 +1608,11 @@ finish(void)
 		    tmin, avg, tmax, sqrt(vari));
 	}
 
-	if (nreceived)
+	if (nreceived) {
 		exit(0);
-	else
+	} else {
 		exit(2);
+	}
 }
 
 #ifdef notdef

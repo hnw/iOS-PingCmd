@@ -16,4 +16,4 @@ FOUNDATION_EXPORT const unsigned char PingCmdVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <PingCmd/PublicHeader.h>
 
-
+extern void *ping_main_routine(void *_arg);

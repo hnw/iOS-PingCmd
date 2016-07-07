@@ -1,0 +1,120 @@
+/*
+ * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
+ *
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+ * 
+ * This file contains Original Code and/or Modifications of Original Code
+ * as defined in and that are subject to the Apple Public Source License
+ * Version 2.0 (the 'License'). You may not use this file except in
+ * compliance with the License. The rights granted to you under the License
+ * may not be used to create, or enable the creation or redistribution of,
+ * unlawful or unlicensed copies of an Apple operating system, or to
+ * circumvent, violate, or enable the circumvention or violation of, any
+ * terms of an Apple operating system software license agreement.
+ * 
+ * Please obtain a copy of the License at
+ * http://www.opensource.apple.com/apsl/ and read it before using this file.
+ * 
+ * The Original Code and all software distributed under the License are
+ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+ * Please see the License for the specific language governing rights and
+ * limitations under the License.
+ * 
+ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
+ */
+/* Copyright (c) 1998, 1999 Apple Computer, Inc. All Rights Reserved */
+/* Copyright (c) 1995 NeXT Computer, Inc. All Rights Reserved */
+/*
+ * Copyright (c) 1982, 1985, 1986, 1988, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *	This product includes software developed by the University of
+ *	California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)socket.h	8.4 (Berkeley) 2/21/94
+ * $FreeBSD: src/sys/sys/socket.h,v 1.39.2.7 2001/07/03 11:02:01 ume Exp $
+ */
+/*
+ * NOTICE: This file was modified by SPARTA, Inc. in 2005 to introduce
+ * support for mandatory and extensible security protections.  This notice
+ * is included in support of clause 2.2 (b) of the Apple Public License,
+ * Version 2.0.
+ */
+
+#ifndef _SYS_SOCKET_VAR_H_
+#define	_SYS_SOCKET_VAR_H_
+
+#define SO_TRAFFIC_CLASS	0x1086	/* Traffic service class (int) */
+#define	 SO_TC_BK_SYS	100		/* lowest class */
+#define	 SO_TC_BK	200
+#define  SO_TC_BE	0
+#define	 SO_TC_RD	300
+#define	 SO_TC_OAM	400
+#define	 SO_TC_AV	500
+#define	 SO_TC_RV	600
+#define	 SO_TC_VI	700
+#define	 SO_TC_VO	800
+#define	 SO_TC_CTL	900		/* highest class */
+#define  SO_TC_MAX	10		/* Total # of traffic classes */
+
+
+/* Background socket configuration flags */
+#define TRAFFIC_MGT_SO_BACKGROUND       0x0001  /* background socket */
+#define TRAFFIC_MGT_TCP_RECVBG          0x0002  /* Only TCP sockets, receiver throttling */
+
+#define SO_RECV_TRAFFIC_CLASS   0x1087          /* Receive traffic class (bool)*/
+#define SO_TRAFFIC_CLASS_DBG    0x1088          /* Debug traffic class (struct so_tcdbg) */
+#define SO_TRAFFIC_CLASS_STATS  0x1089          /* Traffic class statistics */
+#define SO_PRIVILEGED_TRAFFIC_CLASS 0x1090      /* Privileged traffic class (bool) */
+#define SO_DEFUNCTOK    0x1100          /* can be defunct'd */
+#define SO_ISDEFUNCT    0x1101          /* get defunct status */
+
+#define SO_OPPORTUNISTIC        0x1102  /* deprecated; use SO_TRAFFIC_CLASS */
+
+/*
+ * SO_FLUSH flushes any unsent data generated by a given socket.  It takes
+ * an integer parameter, which can be any of the SO_TC traffic class values,
+ * or the special SO_TC_ALL value.
+ */
+#define SO_FLUSH        0x1103          /* flush unsent data (int) */
+#define  SO_TC_ALL      (-1)
+
+#define SO_RECV_ANYIF   0x1104          /* unrestricted inbound processing */
+#define SO_TRAFFIC_MGT_BACKGROUND       0x1105  /* Background traffic management */
+
+#define SO_FLOW_DIVERT_TOKEN    0x1106  /* flow divert token */
+
+#define SO_DELEGATED            0x1107  /* set socket as delegate (pid_t) */
+#define SO_DELEGATED_UUID       0x1108  /* set socket as delegate (uuid_t) */
+#define SO_NECP_ATTRIBUTES      0x1109  /* NECP socket attributes (domain, account, etc.) */
+#define SO_CFIL_SOCK_ID         0x1110  /* get content filter socket ID (cfil_sock_id_t) */
+
+#endif /* !_SYS_SOCKET_VAR_H_ */

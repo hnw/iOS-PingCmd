@@ -10,6 +10,11 @@
 		FE16D00D1D2DDC7500FCC41B /* PingCmd.h in Headers */ = {isa = PBXBuildFile; fileRef = FE16D00C1D2DDC7500FCC41B /* PingCmd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FE16D0141D2DDC7500FCC41B /* PingCmd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE16D0091D2DDC7500FCC41B /* PingCmd.framework */; };
 		FE16D0191D2DDC7500FCC41B /* PingCmdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE16D0181D2DDC7500FCC41B /* PingCmdTests.swift */; };
+		FE16D0241D2DDCCE00FCC41B /* ping.c in Sources */ = {isa = PBXBuildFile; fileRef = FE16D0231D2DDCCE00FCC41B /* ping.c */; };
+		FE16D0261D2DE13200FCC41B /* netinet in Resources */ = {isa = PBXBuildFile; fileRef = FE16D0251D2DE13200FCC41B /* netinet */; };
+		FE16D0281D2DE14300FCC41B /* sys in Resources */ = {isa = PBXBuildFile; fileRef = FE16D0271D2DE14300FCC41B /* sys */; };
+		FE16D02A1D2DF00800FCC41B /* PingCmd.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE16D0291D2DF00800FCC41B /* PingCmd.swift */; };
+		FE16D02C1D2DF1DA00FCC41B /* CStringArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE16D02B1D2DF1DA00FCC41B /* CStringArray.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 		FE16D0131D2DDC7500FCC41B /* PingCmdTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PingCmdTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE16D0181D2DDC7500FCC41B /* PingCmdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingCmdTests.swift; sourceTree = "<group>"; };
 		FE16D01A1D2DDC7500FCC41B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE16D0231D2DDCCE00FCC41B /* ping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ping.c; sourceTree = "<group>"; };
+		FE16D0251D2DE13200FCC41B /* netinet */ = {isa = PBXFileReference; lastKnownFileType = folder; path = netinet; sourceTree = "<group>"; };
+		FE16D0271D2DE14300FCC41B /* sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sys; sourceTree = "<group>"; };
+		FE16D0291D2DF00800FCC41B /* PingCmd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingCmd.swift; sourceTree = "<group>"; };
+		FE16D02B1D2DF1DA00FCC41B /* CStringArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CStringArray.framework; path = Carthage/Build/iOS/CStringArray.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE16D02C1D2DF1DA00FCC41B /* CStringArray.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +64,7 @@
 		FE16CFFF1D2DDC7500FCC41B = {
 			isa = PBXGroup;
 			children = (
+				FE16D02B1D2DF1DA00FCC41B /* CStringArray.framework */,
 				FE16D00B1D2DDC7500FCC41B /* PingCmd */,
 				FE16D0171D2DDC7500FCC41B /* PingCmdTests */,
 				FE16D00A1D2DDC7500FCC41B /* Products */,
@@ -71,8 +83,12 @@
 		FE16D00B1D2DDC7500FCC41B /* PingCmd */ = {
 			isa = PBXGroup;
 			children = (
+				FE16D0271D2DE14300FCC41B /* sys */,
+				FE16D0251D2DE13200FCC41B /* netinet */,
+				FE16D0231D2DDCCE00FCC41B /* ping.c */,
 				FE16D00C1D2DDC7500FCC41B /* PingCmd.h */,
 				FE16D00E1D2DDC7500FCC41B /* Info.plist */,
+				FE16D0291D2DF00800FCC41B /* PingCmd.swift */,
 			);
 			path = PingCmd;
 			sourceTree = "<group>";
@@ -108,6 +124,7 @@
 				FE16D0051D2DDC7500FCC41B /* Frameworks */,
 				FE16D0061D2DDC7500FCC41B /* Headers */,
 				FE16D0071D2DDC7500FCC41B /* Resources */,
+				FE16D02D1D2DF1E100FCC41B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -177,6 +194,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE16D0281D2DE14300FCC41B /* sys in Resources */,
+				FE16D0261D2DE13200FCC41B /* netinet in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,11 +208,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FE16D02D1D2DF1E100FCC41B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CStringArray.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FE16D0041D2DDC7500FCC41B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE16D02A1D2DF00800FCC41B /* PingCmd.swift in Sources */,
+				FE16D0241D2DDCCE00FCC41B /* ping.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,26 +348,37 @@
 		FE16D01E1D2DDC7500FCC41B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PingCmd/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.hnw.PingCmd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		FE16D01F1D2DDC7500FCC41B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PingCmd/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
