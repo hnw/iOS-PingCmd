@@ -1,1 +1,2 @@
-git "file:///Users/hnw/src/github.com/hnw/CStringArray" "e5c8aead4d274462e3584b1a7784c633c96c4213"
+github "hnw/CStringArray" "0.0.1"
+github "hnw/iOS-UnixyCmd" "0.0.1"

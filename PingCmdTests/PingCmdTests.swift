@@ -24,7 +24,6 @@ class PingCmdTests: XCTestCase {
     func testExample() {
         let cmd = PingCmd(["ping", "-c", "4", "8.8.8.8"])
         cmd.exec()
-        cmd.exec()
         print("cout=\(cmd.cout)")
         print("cerr=\(cmd.cerr)")
         print("retval=\(cmd.retval)")

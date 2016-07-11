@@ -248,26 +248,12 @@ static void tvsub(struct timeval *, const struct timeval *);
 static uint32_t str2svc(const char *);
 static void usage(void) __dead2;
 
+#include <unistd.h>
 #include <pthread.h>
-#define SHUTDOWN() write(ctrl_fd, "\n", sizeof("\n"))
-#define exit(retval) {SHUTDOWN(); pthread_exit((void *)retval);}
-
-int ctrl_fd = -1;
-int main(int argc, char *const *argv);
-
-void *ping_main_routine(void *_arg)
-{
-    void **arg = (void **)_arg;
-    int argc = (int)arg[1];
-    char **argv = (char**)arg[2];
-    ctrl_fd = (int)arg[0];
-    void *retval = (void *)(long)main(argc, argv);
-    SHUTDOWN();
-    return retval;
-}
+#define exit(retval) {close(STDOUT_FILENO);close(STDERR_FILENO);pthread_exit((void *)retval);}
 
 int
-main(int argc, char *const *argv)
+ping_main(int argc, char *const *argv)
 {
 	struct sockaddr_in from, sock_in;
 	struct in_addr ifaddr;

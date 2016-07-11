@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE0308551D328A7F008B349A /* UnixyCmd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0308541D328A7F008B349A /* UnixyCmd.framework */; };
 		FE16D00D1D2DDC7500FCC41B /* PingCmd.h in Headers */ = {isa = PBXBuildFile; fileRef = FE16D00C1D2DDC7500FCC41B /* PingCmd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FE16D0141D2DDC7500FCC41B /* PingCmd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE16D0091D2DDC7500FCC41B /* PingCmd.framework */; };
 		FE16D0191D2DDC7500FCC41B /* PingCmdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE16D0181D2DDC7500FCC41B /* PingCmdTests.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE0308541D328A7F008B349A /* UnixyCmd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UnixyCmd.framework; path = Carthage/Build/iOS/UnixyCmd.framework; sourceTree = "<group>"; };
 		FE16D0091D2DDC7500FCC41B /* PingCmd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PingCmd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE16D00C1D2DDC7500FCC41B /* PingCmd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PingCmd.h; sourceTree = "<group>"; };
 		FE16D00E1D2DDC7500FCC41B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE0308551D328A7F008B349A /* UnixyCmd.framework in Frameworks */,
 				FE16D02C1D2DF1DA00FCC41B /* CStringArray.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +67,7 @@
 		FE16CFFF1D2DDC7500FCC41B = {
 			isa = PBXGroup;
 			children = (
+				FE0308541D328A7F008B349A /* UnixyCmd.framework */,
 				FE16D02B1D2DF1DA00FCC41B /* CStringArray.framework */,
 				FE16D00B1D2DDC7500FCC41B /* PingCmd */,
 				FE16D0171D2DDC7500FCC41B /* PingCmdTests */,
@@ -216,6 +220,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/CStringArray.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/UnixyCmd.framework",
 			);
 			outputPaths = (
 			);
@@ -427,6 +432,7 @@
 				FE16D01F1D2DDC7500FCC41B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE16D0201D2DDC7500FCC41B /* Build configuration list for PBXNativeTarget "PingCmdTests" */ = {
 			isa = XCConfigurationList;
@@ -435,6 +441,7 @@
 				FE16D0221D2DDC7500FCC41B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
