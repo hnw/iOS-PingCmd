@@ -248,9 +248,10 @@ static void tvsub(struct timeval *, const struct timeval *);
 static uint32_t str2svc(const char *);
 static void usage(void) __dead2;
 
+#include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
-#define exit(retval) {close(STDOUT_FILENO);close(STDERR_FILENO);pthread_exit((void *)retval);}
+static inline void exit(retval) {fflush(stdout);close(STDOUT_FILENO);fflush(stderr);close(STDERR_FILENO);pthread_exit((void *)retval);}
 
 int
 ping_main(int argc, char *const *argv)
